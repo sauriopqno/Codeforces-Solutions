@@ -3,8 +3,11 @@
 Automated repository powered by GitHub Actions and a custom Python script to track, classify, and organize my accepted (AC) solutions on the Codeforces platform.
 ## Stats and Profile
 <p align="left">
-  <img src="https://cf-readme-stats.vercel.app/api?username=imanol-e-p&theme=dark" alt="Codeforces Stats" height="200"/>
+  <a href="https://codeforces.com/profile/imanol-e-p">
+    <img src="https://cf.ccclub.io/profile/imanol-e-p" alt="Codeforces Stats" height="200"/>
+  </a>
 </p>
+
 
 > Note: This card automatically fetches my current rank, peak rating, and the total number of solved problems directly from the official Codeforces API.
 > 
