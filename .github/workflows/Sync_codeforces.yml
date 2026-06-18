@@ -8,26 +8,35 @@ on:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # Permiso explícito para escribir en tu repo
+
     steps:
-      - name: Checkout Code
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Run UpSolve Sync
-        uses: sstg65/UpSolve@v2
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          # Configuración de Codeforces
-          cf_username: 'imanol-e-p'
-          cf_sync: true
-          
-          # Desactivamos otras plataformas para que solo busque Codeforces
-          lc_sync: false
-          ac_sync: false
-          hr_sync: false
+          python-version: '3.10'
 
-      - name: Push Changes
+      - name: Install Dependencies
+        run: pip install requests
+
+      - name: Run Sync Script
+        env:
+          CF_HANDLE: 'imanol-e-p' 
+        run: python .github/scripts/sync.py
+
+      - name: Commit and Push Changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .
-          git diff-index --quiet HEAD || git commit -m "auto: sync codeforces submissions"
-          git push
+          if ! git diff-index --quiet HEAD; then
+            git commit -m "auto: sync codeforces submissions"
+            git push
+          else
+            echo "No hay nuevas entregas para subir."
+          fi
+          
