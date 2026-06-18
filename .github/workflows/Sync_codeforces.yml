@@ -1,29 +1,33 @@
 name: Sync Codeforces Submissions
 
 on:
-  # Se ejecuta automáticamente cada 6 horas
   schedule:
-    - cron: '0 */6 * * *'
-  
-  # Te permite activarlo manualmente desde la pestaña Actions
-  workflow_dispatch:
+    - cron: '0 */6 * * *' # Se ejecuta cada 6 horas
+  workflow_dispatch:      # Permite ejecución manual
 
 jobs:
   sync:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-      - name: Sync Submissions
-        uses: javed-ansari/codeforces-to-github@v1.2
+      - name: Run UpSolve Sync
+        uses: sstg65/UpSolve@v2
         with:
+          # Configuración de Codeforces
+          cf_username: 'imanol-e-p'
+          cf_sync: true
           
-          cf_handle: 'imanol-e-p'
-          
-          
-          github_branch: 'main'
-          
-          
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # Desactivamos otras plataformas para que solo busque Codeforces
+          lc_sync: false
+          ac_sync: false
+          hr_sync: false
+
+      - name: Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git diff-index --quiet HEAD || git commit -m "auto: sync codeforces submissions"
+          git push
