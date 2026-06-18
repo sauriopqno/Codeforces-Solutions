@@ -4,9 +4,10 @@ Automated repository powered by GitHub Actions and a custom Python script to tra
 ## Stats and Profile
 <p align="left">
   <a href="https://codeforces.com/profile/imanol-e-p">
-    <img src="https://cf.ccclub.io/profile/imanol-e-p" alt="Codeforces Stats" height="200"/>
+    <img src="https://img.shields.io/badge/Codeforces-imanol--e--p-318ce7?style=flat&logo=codeforces&logoColor=white" alt="Codeforces Profile" height="35"/>
   </a>
 </p>
+
 
 
 > Note: This card automatically fetches my current rank, peak rating, and the total number of solved problems directly from the official Codeforces API.
