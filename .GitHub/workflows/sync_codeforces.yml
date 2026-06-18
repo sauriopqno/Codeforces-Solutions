@@ -1,0 +1,29 @@
+name: Sync Codeforces Submissions
+
+on:
+  # Se ejecuta automáticamente cada 6 horas
+  schedule:
+    - cron: '0 */6 * * *'
+  
+  # Te permite activarlo manualmente desde la pestaña Actions
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Sync Submissions
+        uses: javed-ansari/codeforces-to-github@v1.2
+        with:
+          
+          cf_handle: 'imanol-e-p'
+          
+          
+          github_branch: 'main'
+          
+          
+          github_token: ${{ secrets.GITHUB_TOKEN }}
